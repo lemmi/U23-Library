@@ -32,6 +32,7 @@ static int32_t lastMenuUpdate;
 static int32_t gameOverEntryTime;
 static int pause_mode = 0;
 static int gameover = 0;
+static int doneOnce = 0;
 
 int pos_x = (320-42)/2;
 int pos_y = (200-42)/2;
@@ -63,12 +64,12 @@ inline bool RectRectIntersection(int16_t x1, int16_t y1, int16_t w1, int16_t h1,
 
 void gameOver(Bitmap *currframe){
 	if (gameover) {
-		if (currframe)
+		if (currframe && !doneOnce)
 		{
 			DrawFilledRectangle(currframe,0,0,320,200,RGB(255,0,0));
 		}
 
-		if (highscore)
+		if (highscore && !doneOnce)
 		{
 			WriteHighscore(highscore);
 		}
@@ -131,6 +132,7 @@ void Draw(Bitmap *surface) {
 		DrawText(surface, "PAUSE", 50, 180);
 	} else if (gameover) {
 		gameOver(surface);
+		doneOnce = 1;
 		if (SysTickCounter - gameOverEntryTime > 200)
 		{
 			gameover = 0;
@@ -153,6 +155,7 @@ void Draw(Bitmap *surface) {
 			if (RectRectIntersection(stars[i].x, stars[i].y, sprite.width, sprite.height, pos_x, pos_y, spaceBitmap.width, spaceBitmap.height))
 			{
 				gameover = 1;
+				doneOnce = 0;
 				gameOverEntryTime = SysTickCounter;
 			}
 		}
