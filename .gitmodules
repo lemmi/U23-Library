@@ -1,0 +1,3 @@
+[submodule "firmware/pewpewpew"]
+	path = firmware/pewpewpew
+	url = git@github.com:lemmi/pewpewpew.git
