@@ -17,9 +17,12 @@ CCSOURCES = LED.c \
 			Font.c \
 			Random.c \
 			Accelerometer.c \
+			Audio.c \
 			Gamestate.c \
 			UserInterface.c \
-			PushButtons.c 
+			PushButtons.c \
+			Rumble.c \
+			Synth.c
 
 # List Assembler to be assembled with NASM here
 ASOURCES = 
